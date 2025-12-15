@@ -3,6 +3,7 @@ Build/
 obj/
 Debug/
 Release/
+Output/
 x64/
 x86/
 *.exe
