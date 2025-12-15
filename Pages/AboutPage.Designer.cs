@@ -133,6 +133,8 @@
             this.pictureEditLogo.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.False;
             this.pictureEditLogo.Properties.AllowScrollOnMouseWheel = DevExpress.Utils.DefaultBoolean.False;
             this.pictureEditLogo.Properties.AllowZoom = DevExpress.Utils.DefaultBoolean.False;
+            this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
             this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;

@@ -39,15 +39,19 @@
             this.lblLongPress = new System.Windows.Forms.Label();
             this.chkHud = new System.Windows.Forms.CheckBox();
             this.chkMacStyle = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupSwitches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblHeader, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblHint, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupSwitches, 0, 2);
@@ -57,7 +61,7 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 490F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 299F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 593);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -100,7 +104,7 @@
             this.groupSwitches.Location = new System.Drawing.Point(18, 83);
             this.groupSwitches.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
             this.groupSwitches.Name = "groupSwitches";
-            this.groupSwitches.Size = new System.Drawing.Size(645, 484);
+            this.groupSwitches.Size = new System.Drawing.Size(645, 293);
             this.groupSwitches.TabIndex = 2;
             this.groupSwitches.TabStop = false;
             this.groupSwitches.Text = "设置开关";
@@ -202,6 +206,29 @@
             this.chkMacStyle.UseVisualStyleBackColor = true;
             this.chkMacStyle.CheckedChanged += new System.EventHandler(this.chkMacStyle_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.richTextBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(18, 382);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(645, 208);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "测试框";
+            // 
+            // richTextBox
+            // 
+            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(639, 180);
+            this.richTextBox.TabIndex = 0;
+            this.richTextBox.Text = "可以在这进行测试";
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -213,6 +240,7 @@
             this.groupSwitches.ResumeLayout(false);
             this.groupSwitches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -230,5 +258,7 @@
         private System.Windows.Forms.Label lblLongPress;
         private System.Windows.Forms.NumericUpDown numLongPress;
         private System.Windows.Forms.Label lblLongPressUnit;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox;
     }
 }
