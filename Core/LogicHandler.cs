@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,6 +23,8 @@ namespace TapCaps.Core
         private readonly HashSet<Keys> _swallowedMappingKeys = new HashSet<Keys>();
         private readonly List<CompiledKeyMapping> _compiledMappings = new List<CompiledKeyMapping>();
         private List<KeyMappingRule> _rawMappings = new List<KeyMappingRule>();
+
+        private bool lastModeCN = true;
 
         #endregion
 
@@ -139,19 +141,19 @@ namespace TapCaps.Core
             if (isCapOn)
             {
                 InputSimulator.EnsureCapsLock(false);
-                if (EnableHud)
+                if (lastModeCN)
                 {
-                    StateHUD.ShowState("a", "Caps Off");
-                    ShowInputModeHUD();
+                    StateHUD.ShowState("中", "中文");
+                }
+                else
+                {
+                    StateHUD.ShowState("英", "英文");
                 }
             }
             else
             {
                 InputSimulator.SendCtrlSpace();
-                if (EnableHud)
-                {
-                    ShowInputModeHUD();
-                }
+                ShowInputModeHUD();
             }
         }
 
@@ -160,7 +162,7 @@ namespace TapCaps.Core
             InputSimulator.EnsureCapsLock(true);
             if (EnableHud)
             {
-                StateHUD.ShowState("CAPS", "Caps Lock");
+                StateHUD.ShowState("⇪", "Caps Lock");
             }
         }
 
@@ -168,9 +170,15 @@ namespace TapCaps.Core
         {
             if (!EnableHud) return;
             if (InputSimulator.IsEnglishInputMode())
-                StateHUD.ShowState("EN", "English");
+            {
+                lastModeCN = false;
+                StateHUD.ShowState("英", "英文");
+            }
             else
-                StateHUD.ShowState("ZH", "Chinese");
+            {
+                lastModeCN = true;
+                StateHUD.ShowState("中", "中文");
+            }
         }
 
         private void LongPressTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
