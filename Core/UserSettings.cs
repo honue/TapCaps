@@ -14,6 +14,7 @@ namespace TapCaps.Core
         [DataMember] public bool EnableKeyMapping { get; set; } = false;
         [DataMember] public bool EnableHud { get; set; } = true;
         [DataMember] public bool TrayIconEnabled { get; set; } = true;
+        [DataMember] public bool AutoStartEnabled { get; set; } = true;
         [DataMember] public int LongPressThresholdMs { get; set; } = AppConfig.LongPressThresholdMs;
         [DataMember] public List<KeyMappingRule> KeyMappings { get; set; } = new List<KeyMappingRule>();
     }
@@ -44,10 +45,17 @@ namespace TapCaps.Core
 
             try
             {
-                using (var stream = File.OpenRead(path))
+                var json = File.ReadAllText(path, Encoding.UTF8);
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                 {
                     var serializer = new DataContractJsonSerializer(typeof(UserSettings));
-                    return (UserSettings)serializer.ReadObject(stream);
+                    var settings = (UserSettings)serializer.ReadObject(stream);
+                    // 旧版本没有 AutoStartEnabled 字段时，默认开启自启
+                    if (json.IndexOf("AutoStartEnabled", StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        settings.AutoStartEnabled = true;
+                    }
+                    return settings;
                 }
             }
             catch

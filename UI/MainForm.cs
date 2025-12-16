@@ -27,8 +27,9 @@ namespace TapCaps.UI
 
         #region 构造函数
 
-        public MainForm()
+        public MainForm(UserSettings settings = null)
         {
+            _settings = settings;
             InitializeComponent();
             InitializeCore();
             InitializeTrayIcon();
@@ -47,7 +48,10 @@ namespace TapCaps.UI
         {
             _hook = new KeyboardHook();
             _handler = new LogicHandler();
-            _settings = UserSettingsStore.Load() ?? new UserSettings();
+            if (_settings == null)
+            {
+                _settings = UserSettingsStore.Load() ?? new UserSettings();
+            }
 
             // Apply persisted settings to runtime state.
             if (_settings != null)
@@ -317,6 +321,20 @@ namespace TapCaps.UI
             _settings.KeyMappings = _handler.GetKeyMappings().ToList();
 
             UserSettingsStore.Save(_settings);
+        }
+
+        public bool AutoStartEnabled => _settings?.AutoStartEnabled ?? true;
+
+        public void SetAutoStartEnabled(bool enabled)
+        {
+            if (_settings == null)
+            {
+                _settings = new UserSettings();
+            }
+
+            _settings.AutoStartEnabled = enabled;
+            AutoStartManager.SetAutoStart(enabled);
+            PersistSettings();
         }
 
         #endregion

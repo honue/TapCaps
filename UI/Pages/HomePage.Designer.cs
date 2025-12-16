@@ -34,6 +34,8 @@
             this.lblHeader = new System.Windows.Forms.Label();
             this.lblHint = new System.Windows.Forms.Label();
             this.groupSwitches = new System.Windows.Forms.GroupBox();
+            this.lblAutoStart = new System.Windows.Forms.Label();
+            this.toggleAutoStart = new DevExpress.XtraEditors.ToggleSwitch();
             this.lblLongPressUnit = new System.Windows.Forms.Label();
             this.numLongPress = new System.Windows.Forms.NumericUpDown();
             this.lblLongPress = new System.Windows.Forms.Label();
@@ -45,6 +47,7 @@
             this.groupBox1.SuspendLayout();
             this.groupSwitches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleAutoStart.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).BeginInit();
             this.SuspendLayout();
@@ -117,6 +120,8 @@
             // 
             // groupSwitches
             // 
+            this.groupSwitches.Controls.Add(this.lblAutoStart);
+            this.groupSwitches.Controls.Add(this.toggleAutoStart);
             this.groupSwitches.Controls.Add(this.lblLongPressUnit);
             this.groupSwitches.Controls.Add(this.numLongPress);
             this.groupSwitches.Controls.Add(this.lblLongPress);
@@ -134,11 +139,33 @@
             this.groupSwitches.TabStop = false;
             this.groupSwitches.Text = "设置开关";
             // 
+            // lblAutoStart
+            // 
+            this.lblAutoStart.AutoSize = true;
+            this.lblAutoStart.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblAutoStart.Location = new System.Drawing.Point(22, 35);
+            this.lblAutoStart.Name = "lblAutoStart";
+            this.lblAutoStart.Size = new System.Drawing.Size(92, 23);
+            this.lblAutoStart.TabIndex = 8;
+            this.lblAutoStart.Text = "开机自启";
+            // 
+            // toggleAutoStart
+            // 
+            this.toggleAutoStart.Location = new System.Drawing.Point(190, 33);
+            this.toggleAutoStart.Name = "toggleAutoStart";
+            this.toggleAutoStart.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.toggleAutoStart.Properties.Appearance.Options.UseFont = true;
+            this.toggleAutoStart.Properties.OffText = "关";
+            this.toggleAutoStart.Properties.OnText = "开";
+            this.toggleAutoStart.Size = new System.Drawing.Size(95, 27);
+            this.toggleAutoStart.TabIndex = 1;
+            this.toggleAutoStart.Toggled += new System.EventHandler(this.toggleAutoStart_Toggled);
+            // 
             // lblLongPressUnit
             // 
             this.lblLongPressUnit.AutoSize = true;
             this.lblLongPressUnit.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPressUnit.Location = new System.Drawing.Point(276, 121);
+            this.lblLongPressUnit.Location = new System.Drawing.Point(276, 157);
             this.lblLongPressUnit.Name = "lblLongPressUnit";
             this.lblLongPressUnit.Size = new System.Drawing.Size(34, 23);
             this.lblLongPressUnit.TabIndex = 6;
@@ -152,7 +179,7 @@
             0,
             0,
             0});
-            this.numLongPress.Location = new System.Drawing.Point(190, 119);
+            this.numLongPress.Location = new System.Drawing.Point(190, 155);
             this.numLongPress.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -177,7 +204,7 @@
             // 
             this.lblLongPress.AutoSize = true;
             this.lblLongPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPress.Location = new System.Drawing.Point(22, 119);
+            this.lblLongPress.Location = new System.Drawing.Point(22, 155);
             this.lblLongPress.Name = "lblLongPress";
             this.lblLongPress.Size = new System.Drawing.Size(112, 23);
             this.lblLongPress.TabIndex = 4;
@@ -187,7 +214,7 @@
             // 
             this.lblHudText.AutoSize = true;
             this.lblHudText.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblHudText.Location = new System.Drawing.Point(22, 75);
+            this.lblHudText.Location = new System.Drawing.Point(22, 115);
             this.lblHudText.Name = "lblHudText";
             this.lblHudText.Size = new System.Drawing.Size(122, 23);
             this.lblHudText.TabIndex = 7;
@@ -195,21 +222,21 @@
             // 
             // toggleHud
             // 
-            this.toggleHud.Location = new System.Drawing.Point(190, 73);
+            this.toggleHud.Location = new System.Drawing.Point(190, 113);
             this.toggleHud.Name = "toggleHud";
             this.toggleHud.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
             this.toggleHud.Properties.Appearance.Options.UseFont = true;
             this.toggleHud.Properties.OffText = "关";
             this.toggleHud.Properties.OnText = "开";
             this.toggleHud.Size = new System.Drawing.Size(95, 27);
-            this.toggleHud.TabIndex = 3;
+            this.toggleHud.TabIndex = 4;
             this.toggleHud.Toggled += new System.EventHandler(this.toggleHud_Toggled);
             // 
             // lblMacStyleText
             // 
             this.lblMacStyleText.AutoSize = true;
             this.lblMacStyleText.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblMacStyleText.Location = new System.Drawing.Point(22, 35);
+            this.lblMacStyleText.Location = new System.Drawing.Point(22, 75);
             this.lblMacStyleText.Name = "lblMacStyleText";
             this.lblMacStyleText.Size = new System.Drawing.Size(150, 23);
             this.lblMacStyleText.TabIndex = 6;
@@ -217,14 +244,14 @@
             // 
             // toggleMacStyle
             // 
-            this.toggleMacStyle.Location = new System.Drawing.Point(190, 33);
+            this.toggleMacStyle.Location = new System.Drawing.Point(190, 73);
             this.toggleMacStyle.Name = "toggleMacStyle";
             this.toggleMacStyle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
             this.toggleMacStyle.Properties.Appearance.Options.UseFont = true;
             this.toggleMacStyle.Properties.OffText = "关";
             this.toggleMacStyle.Properties.OnText = "开";
             this.toggleMacStyle.Size = new System.Drawing.Size(95, 27);
-            this.toggleMacStyle.TabIndex = 0;
+            this.toggleMacStyle.TabIndex = 2;
             this.toggleMacStyle.Toggled += new System.EventHandler(this.toggleMacStyle_Toggled);
             // 
             // HomePage
@@ -239,6 +266,7 @@
             this.groupSwitches.ResumeLayout(false);
             this.groupSwitches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleAutoStart.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -260,5 +288,7 @@
         private System.Windows.Forms.Label lblLongPressUnit;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox;
+        private System.Windows.Forms.Label lblAutoStart;
+        private DevExpress.XtraEditors.ToggleSwitch toggleAutoStart;
     }
 }

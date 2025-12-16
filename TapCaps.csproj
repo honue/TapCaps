@@ -56,39 +56,39 @@
       <HintPath>Libs\DevExpress.BonusSkins.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.Data.Desktop.v21.1" >
+    <Reference Include="DevExpress.Data.Desktop.v21.1">
       <HintPath>Libs\DevExpress.Data.Desktop.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.Data.v21.1" >
+    <Reference Include="DevExpress.Data.v21.1">
       <HintPath>Libs\DevExpress.Data.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.Printing.v21.1.Core" >
+    <Reference Include="DevExpress.Printing.v21.1.Core">
       <HintPath>Libs\DevExpress.Printing.v21.1.Core.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.Utils.v21.1" >
+    <Reference Include="DevExpress.Utils.v21.1">
       <HintPath>Libs\DevExpress.Utils.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraBars.v21.1" >
+    <Reference Include="DevExpress.XtraBars.v21.1">
       <HintPath>Libs\DevExpress.XtraBars.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.Sparkline.v21.1.Core" >
+    <Reference Include="DevExpress.Sparkline.v21.1.Core">
       <HintPath>Libs\DevExpress.Sparkline.v21.1.Core.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v21.1" >
+    <Reference Include="DevExpress.XtraEditors.v21.1">
       <HintPath>Libs\DevExpress.XtraEditors.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" >
+    <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>Libs\DevExpress.XtraGrid.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraLayout.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" >
+    <Reference Include="DevExpress.XtraLayout.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <HintPath>Libs\DevExpress.XtraLayout.v21.1.dll</HintPath>
       <Private>true</Private>
     </Reference>
@@ -118,23 +118,24 @@
     <Compile Include="Core\InputSimulator.cs" />
     <Compile Include="Core\KeyMappingRule.cs" />
     <Compile Include="Core\LogicHandler.cs" />
+    <Compile Include="Core\AutoStartManager.cs" />
     <Compile Include="Core\UserSettings.cs" />
-    <Compile Include="Pages\AboutPage.cs">
+    <Compile Include="UI\Pages\AboutPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\AboutPage.Designer.cs">
+    <Compile Include="UI\Pages\AboutPage.Designer.cs">
       <DependentUpon>AboutPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\HomePage.cs">
+    <Compile Include="UI\Pages\HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\HomePage.Designer.cs">
+    <Compile Include="UI\Pages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\KeyMappingPage.cs">
+    <Compile Include="UI\Pages\KeyMappingPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\KeyMappingPage.Designer.cs">
+    <Compile Include="UI\Pages\KeyMappingPage.Designer.cs">
       <DependentUpon>KeyMappingPage.cs</DependentUpon>
     </Compile>
     <!-- UI Module -->
@@ -154,13 +155,13 @@
     <!-- Pages Module -->
     <!-- Properties -->
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Pages\AboutPage.resx">
+    <EmbeddedResource Include="UI\Pages\AboutPage.resx">
       <DependentUpon>AboutPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\HomePage.resx">
+    <EmbeddedResource Include="UI\Pages\HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\KeyMappingPage.resx">
+    <EmbeddedResource Include="UI\Pages\KeyMappingPage.resx">
       <DependentUpon>KeyMappingPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using Microsoft.Win32;
+using System.Threading;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
+using TapCaps.Core;
 using TapCaps.UI;
 
 namespace TapCaps
@@ -21,32 +22,20 @@ namespace TapCaps
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("The Bezier Light");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            EnsureAutoStart();
-            Application.Run(new MainForm());
-        }
 
-        /// <summary>
-        /// 在当前用户登录时自启动
-        /// </summary>
-        private static void EnsureAutoStart()
-        {
-            try
+            const string mutexName = "Global\\TapCaps_E5CE010D_4F6B_4C1B_9E9E_9D05A4A91234";
+            bool createdNew;
+            using (var mutex = new Mutex(true, mutexName, out createdNew))
             {
-                const string runKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-                using (var key = Registry.CurrentUser.OpenSubKey(runKey, true) ?? Registry.CurrentUser.CreateSubKey(runKey))
+                if (!createdNew)
                 {
-                    if (key == null) return;
-                    string exePath = Application.ExecutablePath;
-                    var current = key.GetValue("TapCaps") as string;
-                    if (!string.Equals(current, exePath, StringComparison.OrdinalIgnoreCase))
-                    {
-                        key.SetValue("TapCaps", exePath);
-                    }
+                    MessageBox.Show("TapCaps 已在运行，无需重复启动。", "TapCaps", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-            }
-            catch
-            {
-                // 忽略注册失败，不阻止主程序运行
+
+                var settings = UserSettingsStore.Load() ?? new UserSettings();
+                AutoStartManager.SetAutoStart(settings.AutoStartEnabled);
+                Application.Run(new MainForm(settings));
             }
         }
     }

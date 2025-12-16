@@ -38,12 +38,18 @@ namespace TapCaps.Pages
             toggleMacStyle.Enabled = hasHandler;
             toggleHud.Enabled = hasHandler;
             numLongPress.Enabled = hasHandler;
+            toggleAutoStart.Enabled = _mainForm != null;
 
             if (hasHandler)
             {
                 toggleMacStyle.IsOn = _handler.EnableMacCapsLock;
                 toggleHud.IsOn = _handler.EnableHud;
                 numLongPress.Value = ClampToRange(_handler.LongPressThresholdMs, numLongPress.Minimum, numLongPress.Maximum);
+            }
+
+            if (_mainForm != null)
+            {
+                toggleAutoStart.IsOn = _mainForm.AutoStartEnabled;
             }
 
         }
@@ -75,6 +81,11 @@ namespace TapCaps.Pages
             if (_handler == null) return;
             _handler.LongPressThresholdMs = (int)numLongPress.Value;
             _mainForm?.PersistSettings();
+        }
+
+        private void toggleAutoStart_Toggled(object sender, EventArgs e)
+        {
+            _mainForm?.SetAutoStartEnabled(toggleAutoStart.IsOn);
         }
     }
 }
