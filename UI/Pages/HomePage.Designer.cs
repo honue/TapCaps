@@ -46,8 +46,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupSwitches.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleAutoStart.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).BeginInit();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 191F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 129F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 593);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -76,10 +76,10 @@
             this.groupBox1.Controls.Add(this.richTextBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(18, 274);
+            this.groupBox1.Location = new System.Drawing.Point(18, 212);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 316);
+            this.groupBox1.Size = new System.Drawing.Size(645, 378);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "测试框";
@@ -90,7 +90,7 @@
             this.richTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(639, 288);
+            this.richTextBox.Size = new System.Drawing.Size(639, 350);
             this.richTextBox.TabIndex = 0;
             this.richTextBox.Text = "可以在这进行测试";
             // 
@@ -134,7 +134,7 @@
             this.groupSwitches.Location = new System.Drawing.Point(18, 83);
             this.groupSwitches.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
             this.groupSwitches.Name = "groupSwitches";
-            this.groupSwitches.Size = new System.Drawing.Size(645, 185);
+            this.groupSwitches.Size = new System.Drawing.Size(645, 123);
             this.groupSwitches.TabIndex = 2;
             this.groupSwitches.TabStop = false;
             this.groupSwitches.Text = "设置开关";
@@ -145,7 +145,7 @@
             this.lblAutoStart.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblAutoStart.Location = new System.Drawing.Point(22, 35);
             this.lblAutoStart.Name = "lblAutoStart";
-            this.lblAutoStart.Size = new System.Drawing.Size(92, 23);
+            this.lblAutoStart.Size = new System.Drawing.Size(78, 23);
             this.lblAutoStart.TabIndex = 8;
             this.lblAutoStart.Text = "开机自启";
             // 
@@ -165,7 +165,7 @@
             // 
             this.lblLongPressUnit.AutoSize = true;
             this.lblLongPressUnit.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPressUnit.Location = new System.Drawing.Point(276, 157);
+            this.lblLongPressUnit.Location = new System.Drawing.Point(579, 77);
             this.lblLongPressUnit.Name = "lblLongPressUnit";
             this.lblLongPressUnit.Size = new System.Drawing.Size(34, 23);
             this.lblLongPressUnit.TabIndex = 6;
@@ -179,7 +179,7 @@
             0,
             0,
             0});
-            this.numLongPress.Location = new System.Drawing.Point(190, 155);
+            this.numLongPress.Location = new System.Drawing.Point(493, 75);
             this.numLongPress.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -204,7 +204,7 @@
             // 
             this.lblLongPress.AutoSize = true;
             this.lblLongPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPress.Location = new System.Drawing.Point(22, 155);
+            this.lblLongPress.Location = new System.Drawing.Point(325, 75);
             this.lblLongPress.Name = "lblLongPress";
             this.lblLongPress.Size = new System.Drawing.Size(112, 23);
             this.lblLongPress.TabIndex = 4;
@@ -214,7 +214,7 @@
             // 
             this.lblHudText.AutoSize = true;
             this.lblHudText.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblHudText.Location = new System.Drawing.Point(22, 115);
+            this.lblHudText.Location = new System.Drawing.Point(325, 35);
             this.lblHudText.Name = "lblHudText";
             this.lblHudText.Size = new System.Drawing.Size(122, 23);
             this.lblHudText.TabIndex = 7;
@@ -222,7 +222,7 @@
             // 
             // toggleHud
             // 
-            this.toggleHud.Location = new System.Drawing.Point(190, 113);
+            this.toggleHud.Location = new System.Drawing.Point(493, 33);
             this.toggleHud.Name = "toggleHud";
             this.toggleHud.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
             this.toggleHud.Properties.Appearance.Options.UseFont = true;
@@ -265,8 +265,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupSwitches.ResumeLayout(false);
             this.groupSwitches.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleAutoStart.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).EndInit();
             this.ResumeLayout(false);

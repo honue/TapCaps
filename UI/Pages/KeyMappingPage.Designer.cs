@@ -32,6 +32,8 @@
             this.lblHint = new System.Windows.Forms.Label();
             this.btnAddMapping = new DevExpress.XtraEditors.SimpleButton();
             this.btnRemoveMapping = new DevExpress.XtraEditors.SimpleButton();
+            this.btnImportMapping = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExportMapping = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Shortcuts = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,7 +71,7 @@
             this.btnAddMapping.Location = new System.Drawing.Point(671, 34);
             this.btnAddMapping.Name = "btnAddMapping";
             this.btnAddMapping.Size = new System.Drawing.Size(101, 32);
-            this.btnAddMapping.TabIndex = 3;
+            this.btnAddMapping.TabIndex = 5;
             this.btnAddMapping.Text = "新增映射";
             this.btnAddMapping.Click += new System.EventHandler(this.btnAddMapping_Click);
             // 
@@ -79,9 +81,29 @@
             this.btnRemoveMapping.Location = new System.Drawing.Point(778, 34);
             this.btnRemoveMapping.Name = "btnRemoveMapping";
             this.btnRemoveMapping.Size = new System.Drawing.Size(105, 32);
-            this.btnRemoveMapping.TabIndex = 4;
+            this.btnRemoveMapping.TabIndex = 6;
             this.btnRemoveMapping.Text = "删除选中";
             this.btnRemoveMapping.Click += new System.EventHandler(this.btnRemoveMapping_Click);
+            // 
+            // btnImportMapping
+            // 
+            this.btnImportMapping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportMapping.Location = new System.Drawing.Point(450, 34);
+            this.btnImportMapping.Name = "btnImportMapping";
+            this.btnImportMapping.Size = new System.Drawing.Size(101, 32);
+            this.btnImportMapping.TabIndex = 3;
+            this.btnImportMapping.Text = "导入配置";
+            this.btnImportMapping.Click += new System.EventHandler(this.btnImportMapping_Click);
+            // 
+            // btnExportMapping
+            // 
+            this.btnExportMapping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportMapping.Location = new System.Drawing.Point(557, 34);
+            this.btnExportMapping.Name = "btnExportMapping";
+            this.btnExportMapping.Size = new System.Drawing.Size(101, 32);
+            this.btnExportMapping.TabIndex = 4;
+            this.btnExportMapping.Text = "导出配置";
+            this.btnExportMapping.Click += new System.EventHandler(this.btnExportMapping_Click);
             // 
             // gridControl1
             // 
@@ -140,6 +162,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toggleEnableMapping);
             this.Controls.Add(this.btnRemoveMapping);
+            this.Controls.Add(this.btnExportMapping);
+            this.Controls.Add(this.btnImportMapping);
             this.Controls.Add(this.btnAddMapping);
             this.Controls.Add(this.lblHint);
             this.Controls.Add(this.lblHeader);
@@ -159,6 +183,8 @@
         private System.Windows.Forms.Label lblHint;
         private DevExpress.XtraEditors.SimpleButton btnAddMapping;
         private DevExpress.XtraEditors.SimpleButton btnRemoveMapping;
+        private DevExpress.XtraEditors.SimpleButton btnImportMapping;
+        private DevExpress.XtraEditors.SimpleButton btnExportMapping;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn Shortcuts;

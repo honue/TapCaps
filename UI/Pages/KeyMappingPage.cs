@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -115,6 +117,84 @@ namespace TapCaps.Pages
             PersistMappings();
         }
 
+        private void btnImportMapping_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                Title = "导入按键映射"
+            })
+            {
+                if (dialog.ShowDialog() != DialogResult.OK) return;
+
+                try
+                {
+                    List<KeyMappingRule> rules;
+                    var serializer = new DataContractJsonSerializer(typeof(List<KeyMappingRule>));
+                    using (var stream = File.OpenRead(dialog.FileName))
+                    {
+                        rules = (List<KeyMappingRule>)serializer.ReadObject(stream);
+                    }
+
+                    if (rules == null)
+                    {
+                        XtraMessageBox.Show("导入失败：文件格式不正确。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    foreach (var rule in rules)
+                    {
+                        if (!IsValidRule(rule, out var error))
+                        {
+                            XtraMessageBox.Show($"导入失败：{error}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+
+                    _bindings.Clear();
+                    foreach (var rule in rules)
+                    {
+                        _bindings.Add(new KeyMappingRule { Source = rule.Source, Target = rule.Target });
+                    }
+
+                    PersistMappings();
+                    XtraMessageBox.Show("导入成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"导入失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnExportMapping_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                FileName = "TapCapsKeyMappings.json",
+                Title = "导出按键映射"
+            })
+            {
+                if (dialog.ShowDialog() != DialogResult.OK) return;
+
+                try
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(List<KeyMappingRule>));
+                    using (var stream = File.Create(dialog.FileName))
+                    {
+                        serializer.WriteObject(stream, _bindings.ToList());
+                    }
+
+                    XtraMessageBox.Show("导出成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"导出失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void toggleEnableMapping_Toggled(object sender, EventArgs e)
         {
             if (_handler == null) return;
@@ -223,6 +303,30 @@ namespace TapCaps.Pages
             {
                 _winKeyDown = isDown;
             }
+        }
+
+        private bool IsValidRule(KeyMappingRule rule, out string error)
+        {
+            if (rule == null)
+            {
+                error = "存在空的映射项。";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(rule.Source) || string.IsNullOrWhiteSpace(rule.Target))
+            {
+                error = "源快捷键或目标快捷键为空。";
+                return false;
+            }
+
+            if (!KeyStroke.TryParse(rule.Source, out _) || !KeyStroke.TryParse(rule.Target, out _))
+            {
+                error = $"格式错误：{rule.Source} -> {rule.Target}";
+                return false;
+            }
+
+            error = null;
+            return true;
         }
     }
 }
