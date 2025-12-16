@@ -18,7 +18,7 @@ namespace TapCaps
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.UserSkins.BonusSkins.Register();
 
-            DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("Office 2016 Colorful");
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("The Bezier Light");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             EnsureAutoStart();

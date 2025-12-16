@@ -35,25 +35,17 @@ namespace TapCaps.Pages
         {
             // Disable switches if no handler is passed in (design-time scenario).
             bool hasHandler = _handler != null;
-            chkMacStyle.Enabled = hasHandler;
-            chkKeyMapping.Enabled = hasHandler;
-            chkHud.Enabled = hasHandler;
+            toggleMacStyle.Enabled = hasHandler;
+            toggleHud.Enabled = hasHandler;
             numLongPress.Enabled = hasHandler;
 
             if (hasHandler)
             {
-                chkMacStyle.Checked = _handler.EnableMacCapsLock;
-                chkKeyMapping.Checked = _handler.EnableKeyMapping;
-                chkHud.Checked = _handler.EnableHud;
+                toggleMacStyle.IsOn = _handler.EnableMacCapsLock;
+                toggleHud.IsOn = _handler.EnableHud;
                 numLongPress.Value = ClampToRange(_handler.LongPressThresholdMs, numLongPress.Minimum, numLongPress.Maximum);
             }
 
-            bool hasMain = _mainForm != null;
-            chkTrayIcon.Enabled = hasMain;
-            if (hasMain)
-            {
-                chkTrayIcon.Checked = _mainForm.TrayIconEnabled;
-            }
         }
 
         private static decimal ClampToRange(int value, decimal min, decimal max)
@@ -63,33 +55,20 @@ namespace TapCaps.Pages
             return value;
         }
 
-        private void chkMacStyle_CheckedChanged(object sender, EventArgs e)
+        private void toggleMacStyle_Toggled(object sender, EventArgs e)
         {
             if (_handler == null) return;
-            _handler.EnableMacCapsLock = chkMacStyle.Checked;
+            _handler.EnableMacCapsLock = toggleMacStyle.IsOn;
             _mainForm?.PersistSettings();
         }
 
-        private void chkKeyMapping_CheckedChanged(object sender, EventArgs e)
+        private void toggleHud_Toggled(object sender, EventArgs e)
         {
             if (_handler == null) return;
-            _handler.EnableKeyMapping = chkKeyMapping.Checked;
+            _handler.EnableHud = toggleHud.IsOn;
             _mainForm?.PersistSettings();
         }
 
-        private void chkHud_CheckedChanged(object sender, EventArgs e)
-        {
-            if (_handler == null) return;
-            _handler.EnableHud = chkHud.Checked;
-            _mainForm?.PersistSettings();
-        }
-
-        private void chkTrayIcon_CheckedChanged(object sender, EventArgs e)
-        {
-            if (_mainForm == null) return;
-            _mainForm.SetTrayIconEnabled(chkTrayIcon.Checked);
-            _mainForm.PersistSettings();
-        }
 
         private void numLongPress_ValueChanged(object sender, EventArgs e)
         {

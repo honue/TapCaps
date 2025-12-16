@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.lblHint = new System.Windows.Forms.Label();
             this.groupSwitches = new System.Windows.Forms.GroupBox();
-            this.chkKeyMapping = new System.Windows.Forms.CheckBox();
-            this.chkTrayIcon = new System.Windows.Forms.CheckBox();
             this.lblLongPressUnit = new System.Windows.Forms.Label();
             this.numLongPress = new System.Windows.Forms.NumericUpDown();
             this.lblLongPress = new System.Windows.Forms.Label();
-            this.chkHud = new System.Windows.Forms.CheckBox();
-            this.chkMacStyle = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.lblHudText = new System.Windows.Forms.Label();
+            this.toggleHud = new DevExpress.XtraEditors.ToggleSwitch();
+            this.lblMacStyleText = new System.Windows.Forms.Label();
+            this.toggleMacStyle = new DevExpress.XtraEditors.ToggleSwitch();
             this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupSwitches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -61,10 +63,33 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 299F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 191F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 593);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.richTextBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(18, 274);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(645, 316);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "测试框";
+            // 
+            // richTextBox
+            // 
+            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(639, 288);
+            this.richTextBox.TabIndex = 0;
+            this.richTextBox.Text = "可以在这进行测试";
             // 
             // lblHeader
             // 
@@ -92,52 +117,28 @@
             // 
             // groupSwitches
             // 
-            this.groupSwitches.Controls.Add(this.chkKeyMapping);
-            this.groupSwitches.Controls.Add(this.chkTrayIcon);
             this.groupSwitches.Controls.Add(this.lblLongPressUnit);
             this.groupSwitches.Controls.Add(this.numLongPress);
             this.groupSwitches.Controls.Add(this.lblLongPress);
-            this.groupSwitches.Controls.Add(this.chkHud);
-            this.groupSwitches.Controls.Add(this.chkMacStyle);
+            this.groupSwitches.Controls.Add(this.lblHudText);
+            this.groupSwitches.Controls.Add(this.toggleHud);
+            this.groupSwitches.Controls.Add(this.lblMacStyleText);
+            this.groupSwitches.Controls.Add(this.toggleMacStyle);
             this.groupSwitches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupSwitches.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupSwitches.Location = new System.Drawing.Point(18, 83);
             this.groupSwitches.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
             this.groupSwitches.Name = "groupSwitches";
-            this.groupSwitches.Size = new System.Drawing.Size(645, 293);
+            this.groupSwitches.Size = new System.Drawing.Size(645, 185);
             this.groupSwitches.TabIndex = 2;
             this.groupSwitches.TabStop = false;
             this.groupSwitches.Text = "设置开关";
-            // 
-            // chkKeyMapping
-            // 
-            this.chkKeyMapping.AutoSize = true;
-            this.chkKeyMapping.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkKeyMapping.Location = new System.Drawing.Point(24, 71);
-            this.chkKeyMapping.Name = "chkKeyMapping";
-            this.chkKeyMapping.Size = new System.Drawing.Size(168, 27);
-            this.chkKeyMapping.TabIndex = 1;
-            this.chkKeyMapping.Text = "启用按键映射功能";
-            this.chkKeyMapping.UseVisualStyleBackColor = true;
-            this.chkKeyMapping.CheckedChanged += new System.EventHandler(this.chkKeyMapping_CheckedChanged);
-            // 
-            // chkTrayIcon
-            // 
-            this.chkTrayIcon.AutoSize = true;
-            this.chkTrayIcon.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkTrayIcon.Location = new System.Drawing.Point(24, 135);
-            this.chkTrayIcon.Name = "chkTrayIcon";
-            this.chkTrayIcon.Size = new System.Drawing.Size(236, 27);
-            this.chkTrayIcon.TabIndex = 2;
-            this.chkTrayIcon.Text = "在任务栏托盘显示程序图标";
-            this.chkTrayIcon.UseVisualStyleBackColor = true;
-            this.chkTrayIcon.CheckedChanged += new System.EventHandler(this.chkTrayIcon_CheckedChanged);
             // 
             // lblLongPressUnit
             // 
             this.lblLongPressUnit.AutoSize = true;
             this.lblLongPressUnit.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPressUnit.Location = new System.Drawing.Point(239, 181);
+            this.lblLongPressUnit.Location = new System.Drawing.Point(276, 121);
             this.lblLongPressUnit.Name = "lblLongPressUnit";
             this.lblLongPressUnit.Size = new System.Drawing.Size(34, 23);
             this.lblLongPressUnit.TabIndex = 6;
@@ -151,7 +152,7 @@
             0,
             0,
             0});
-            this.numLongPress.Location = new System.Drawing.Point(153, 178);
+            this.numLongPress.Location = new System.Drawing.Point(190, 119);
             this.numLongPress.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -176,58 +177,55 @@
             // 
             this.lblLongPress.AutoSize = true;
             this.lblLongPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLongPress.Location = new System.Drawing.Point(22, 180);
+            this.lblLongPress.Location = new System.Drawing.Point(22, 119);
             this.lblLongPress.Name = "lblLongPress";
             this.lblLongPress.Size = new System.Drawing.Size(112, 23);
             this.lblLongPress.TabIndex = 4;
             this.lblLongPress.Text = "长按阈值设置";
             // 
-            // chkHud
+            // lblHudText
             // 
-            this.chkHud.AutoSize = true;
-            this.chkHud.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkHud.Location = new System.Drawing.Point(24, 102);
-            this.chkHud.Name = "chkHud";
-            this.chkHud.Size = new System.Drawing.Size(183, 27);
-            this.chkHud.TabIndex = 3;
-            this.chkHud.Text = "显示 HUD 提示气泡";
-            this.chkHud.UseVisualStyleBackColor = true;
-            this.chkHud.CheckedChanged += new System.EventHandler(this.chkHud_CheckedChanged);
+            this.lblHudText.AutoSize = true;
+            this.lblHudText.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblHudText.Location = new System.Drawing.Point(22, 75);
+            this.lblHudText.Name = "lblHudText";
+            this.lblHudText.Size = new System.Drawing.Size(122, 23);
+            this.lblHudText.TabIndex = 7;
+            this.lblHudText.Text = "HUD 提示气泡";
             // 
-            // chkMacStyle
+            // toggleHud
             // 
-            this.chkMacStyle.AutoSize = true;
-            this.chkMacStyle.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkMacStyle.Location = new System.Drawing.Point(24, 34);
-            this.chkMacStyle.Name = "chkMacStyle";
-            this.chkMacStyle.Size = new System.Drawing.Size(306, 27);
-            this.chkMacStyle.TabIndex = 0;
-            this.chkMacStyle.Text = "启用 macOS 风格的 CapsLock 行为";
-            this.chkMacStyle.UseVisualStyleBackColor = true;
-            this.chkMacStyle.CheckedChanged += new System.EventHandler(this.chkMacStyle_CheckedChanged);
+            this.toggleHud.Location = new System.Drawing.Point(190, 73);
+            this.toggleHud.Name = "toggleHud";
+            this.toggleHud.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.toggleHud.Properties.Appearance.Options.UseFont = true;
+            this.toggleHud.Properties.OffText = "关";
+            this.toggleHud.Properties.OnText = "开";
+            this.toggleHud.Size = new System.Drawing.Size(95, 27);
+            this.toggleHud.TabIndex = 3;
+            this.toggleHud.Toggled += new System.EventHandler(this.toggleHud_Toggled);
             // 
-            // groupBox1
+            // lblMacStyleText
             // 
-            this.groupBox1.Controls.Add(this.richTextBox);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(18, 382);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 208);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "测试框";
+            this.lblMacStyleText.AutoSize = true;
+            this.lblMacStyleText.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMacStyleText.Location = new System.Drawing.Point(22, 35);
+            this.lblMacStyleText.Name = "lblMacStyleText";
+            this.lblMacStyleText.Size = new System.Drawing.Size(150, 23);
+            this.lblMacStyleText.TabIndex = 6;
+            this.lblMacStyleText.Text = "macOS CapsLock";
             // 
-            // richTextBox
+            // toggleMacStyle
             // 
-            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox.Location = new System.Drawing.Point(3, 25);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(639, 180);
-            this.richTextBox.TabIndex = 0;
-            this.richTextBox.Text = "可以在这进行测试";
+            this.toggleMacStyle.Location = new System.Drawing.Point(190, 33);
+            this.toggleMacStyle.Name = "toggleMacStyle";
+            this.toggleMacStyle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.toggleMacStyle.Properties.Appearance.Options.UseFont = true;
+            this.toggleMacStyle.Properties.OffText = "关";
+            this.toggleMacStyle.Properties.OnText = "开";
+            this.toggleMacStyle.Size = new System.Drawing.Size(95, 27);
+            this.toggleMacStyle.TabIndex = 0;
+            this.toggleMacStyle.Toggled += new System.EventHandler(this.toggleMacStyle_Toggled);
             // 
             // HomePage
             // 
@@ -237,10 +235,12 @@
             this.Name = "HomePage";
             this.Size = new System.Drawing.Size(681, 593);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupSwitches.ResumeLayout(false);
             this.groupSwitches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongPress)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.toggleHud.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleMacStyle.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -251,10 +251,10 @@
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblHint;
         private System.Windows.Forms.GroupBox groupSwitches;
-        private System.Windows.Forms.CheckBox chkKeyMapping;
-        private System.Windows.Forms.CheckBox chkMacStyle;
-        private System.Windows.Forms.CheckBox chkHud;
-        private System.Windows.Forms.CheckBox chkTrayIcon;
+        private System.Windows.Forms.Label lblMacStyleText;
+        private DevExpress.XtraEditors.ToggleSwitch toggleMacStyle;
+        private System.Windows.Forms.Label lblHudText;
+        private DevExpress.XtraEditors.ToggleSwitch toggleHud;
         private System.Windows.Forms.Label lblLongPress;
         private System.Windows.Forms.NumericUpDown numLongPress;
         private System.Windows.Forms.Label lblLongPressUnit;

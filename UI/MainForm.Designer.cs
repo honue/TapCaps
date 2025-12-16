@@ -52,8 +52,6 @@
             // 
             // AccordionControl
             // 
-            this.AccordionControl.Appearance.AccordionControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
-            this.AccordionControl.Appearance.AccordionControl.Options.UseBackColor = true;
             this.AccordionControl.Appearance.Group.Hovered.ForeColor = System.Drawing.Color.White;
             this.AccordionControl.Appearance.Group.Hovered.Options.UseForeColor = true;
             this.AccordionControl.Appearance.Group.Normal.ForeColor = System.Drawing.Color.White;
@@ -81,7 +79,7 @@
             // HomePageElement
             // 
             this.HomePageElement.Appearance.Default.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HomePageElement.Appearance.Default.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
+            this.HomePageElement.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.HomePageElement.Appearance.Default.Options.UseFont = true;
             this.HomePageElement.Appearance.Default.Options.UseForeColor = true;
             this.HomePageElement.Expanded = true;
@@ -95,7 +93,7 @@
             // KeyMappingPageElement
             // 
             this.KeyMappingPageElement.Appearance.Default.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F);
-            this.KeyMappingPageElement.Appearance.Default.ForeColor = System.Drawing.Color.Black;
+            this.KeyMappingPageElement.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.KeyMappingPageElement.Appearance.Default.Options.UseFont = true;
             this.KeyMappingPageElement.Appearance.Default.Options.UseForeColor = true;
             this.KeyMappingPageElement.Height = 50;
@@ -108,12 +106,12 @@
             // AboutPageElement
             // 
             this.AboutPageElement.Appearance.Default.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F);
-            this.AboutPageElement.Appearance.Default.ForeColor = System.Drawing.Color.Black;
+            this.AboutPageElement.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.AboutPageElement.Appearance.Default.Options.UseFont = true;
             this.AboutPageElement.Appearance.Default.Options.UseForeColor = true;
             this.AboutPageElement.Expanded = true;
             this.AboutPageElement.Height = 50;
-            this.AboutPageElement.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("SettingsPageElement.ImageOptions.SvgImage")));
+            this.AboutPageElement.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("AboutPageElement.ImageOptions.SvgImage")));
             this.AboutPageElement.Name = "AboutPageElement";
             this.AboutPageElement.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.AboutPageElement.Text = "关  于";
@@ -147,7 +145,7 @@
             this.Name = "MainForm";
             this.NavigationControl = this.AccordionControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TapCaps";
+            this.Text = "Tap Caps";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AccordionControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
