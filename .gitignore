@@ -3,7 +3,6 @@ Build/
 obj/
 Debug/
 Release/
-Output/
 x64/
 x86/
 *.exe
@@ -41,3 +40,5 @@ x86/
 *.ipch
 
 # 不排除
+Inno/**
+!Inno/inno_setup.iss

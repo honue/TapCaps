@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "Tap Caps"
-#define MyAppVersion "1.1"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "honue"
 #define MyAppURL "https://github.com/honue"
 #define MyAppExeName "TapCaps.exe"
@@ -25,7 +25,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=TapCaps_Setup_v1.1
+OutputBaseFilename=TapCaps_Setup_v1.2
 SetupIconFile=E:\MasterWorkspace\TapCaps\TapCaps.ico
 SolidCompression=yes
 WizardStyle=modern
