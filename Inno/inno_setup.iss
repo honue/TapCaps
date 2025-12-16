@@ -20,7 +20,7 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 DisableProgramGroupPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
 
-OutputBaseFilename=TapCaps_Setup_v{#MyAppVersion}
+OutputBaseFilename=TapCaps_Setup_{#MyAppVersion}
 
 ; ✅ 相对路径
 SetupIconFile=..\TapCaps.ico
