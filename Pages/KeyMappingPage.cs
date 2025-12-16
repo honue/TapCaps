@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using TapCaps.Core;
@@ -14,6 +15,7 @@ namespace TapCaps.Pages
         private readonly LogicHandler _handler;
         private BindingList<KeyMappingRule> _bindings;
         private TapCaps.UI.MainForm _mainForm;
+        private bool _winKeyDown;
 
         public LogicHandler Handler => _handler;
 
@@ -29,7 +31,7 @@ namespace TapCaps.Pages
             _mainForm = this.FindForm() as TapCaps.UI.MainForm;
             InitializeGrid();
             LoadMappings();
-            ToggleEnabledState(_handler != null);
+            InitializeMappingToggle();
         }
 
         private void InitializeGrid()
@@ -40,6 +42,8 @@ namespace TapCaps.Pages
             gridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.OptionsBehavior.Editable = true;
             gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.ShownEditor += GridView1_ShownEditor;
+            gridView1.HiddenEditor += GridView1_HiddenEditor;
             gridView1.CellValueChanged += GridView1_CellValueChanged;
             gridView1.ValidatingEditor += GridView1_ValidatingEditor;
 
@@ -111,6 +115,16 @@ namespace TapCaps.Pages
             PersistMappings();
         }
 
+        private void toggleEnableMapping_Toggled(object sender, EventArgs e)
+        {
+            if (_handler == null) return;
+
+            bool enabled = toggleEnableMapping.IsOn;
+            _handler.EnableKeyMapping = enabled;
+            ToggleEnabledState(enabled);
+            _mainForm?.PersistSettings();
+        }
+
         private void PersistMappings()
         {
             if (_handler == null) return;
@@ -123,6 +137,92 @@ namespace TapCaps.Pages
             gridControl1.Enabled = enabled;
             btnAddMapping.Enabled = enabled;
             btnRemoveMapping.Enabled = enabled;
+        }
+
+        private void InitializeMappingToggle()
+        {
+            bool hasHandler = _handler != null;
+            toggleEnableMapping.Enabled = hasHandler;
+            bool enabled = hasHandler && _handler.EnableKeyMapping;
+            toggleEnableMapping.IsOn = enabled;
+            ToggleEnabledState(enabled);
+        }
+
+        private void GridView1_ShownEditor(object sender, EventArgs e)
+        {
+            _winKeyDown = false;
+            if (gridView1.ActiveEditor is BaseEdit editor)
+            {
+                editor.KeyDown += Editor_KeyDown;
+                editor.KeyUp += Editor_KeyUp;
+            }
+        }
+
+        private void GridView1_HiddenEditor(object sender, EventArgs e)
+        {
+            if (gridView1.ActiveEditor is BaseEdit editor)
+            {
+                editor.KeyDown -= Editor_KeyDown;
+                editor.KeyUp -= Editor_KeyUp;
+            }
+
+            _winKeyDown = false;
+        }
+
+        private void Editor_KeyDown(object sender, KeyEventArgs e)
+        {
+            UpdateWinState(e.KeyCode, true);
+
+            if (IsModifierKey(e.KeyCode)) return;
+
+            var stroke = CreateKeyStroke(e.KeyCode, e);
+            if (stroke == null) return;
+
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            gridView1.SetFocusedValue(stroke.ToDisplayString());
+            gridView1.CloseEditor();
+        }
+
+        private void Editor_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateWinState(e.KeyCode, false);
+        }
+
+        private KeyStroke CreateKeyStroke(Keys key, KeyEventArgs e)
+        {
+            if (key == Keys.None) return null;
+            bool win = _winKeyDown || IsWinKey(key);
+            return new KeyStroke(key, e.Control, e.Shift, e.Alt, win);
+        }
+
+        private static bool IsModifierKey(Keys key)
+        {
+            return key == Keys.ControlKey ||
+                   key == Keys.LControlKey ||
+                   key == Keys.RControlKey ||
+                   key == Keys.ShiftKey ||
+                   key == Keys.LShiftKey ||
+                   key == Keys.RShiftKey ||
+                   key == Keys.Menu ||
+                   key == Keys.Alt ||
+                   key == Keys.LMenu ||
+                   key == Keys.RMenu ||
+                   IsWinKey(key);
+        }
+
+        private static bool IsWinKey(Keys key)
+        {
+            return key == Keys.LWin || key == Keys.RWin;
+        }
+
+        private void UpdateWinState(Keys key, bool isDown)
+        {
+            if (IsWinKey(key))
+            {
+                _winKeyDown = isDown;
+            }
         }
     }
 }

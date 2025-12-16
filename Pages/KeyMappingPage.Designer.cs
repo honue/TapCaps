@@ -36,8 +36,10 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Shortcuts = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ShortcutActions = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.toggleEnableMapping = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleEnableMapping.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblHeader
@@ -45,7 +47,7 @@
             this.lblHeader.Font = new System.Drawing.Font("Microsoft YaHei UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblHeader.Location = new System.Drawing.Point(34, 20);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(359, 40);
+            this.lblHeader.Size = new System.Drawing.Size(110, 41);
             this.lblHeader.TabIndex = 1;
             this.lblHeader.Text = "按键映射";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -90,7 +92,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(845, 455);
-            this.gridControl1.TabIndex = 5;
+            this.gridControl1.TabIndex = 7;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -120,10 +122,23 @@
             this.ShortcutActions.VisibleIndex = 1;
             this.ShortcutActions.Width = 94;
             // 
+            // toggleEnableMapping
+            // 
+            this.toggleEnableMapping.Location = new System.Drawing.Point(150, 31);
+            this.toggleEnableMapping.Name = "toggleEnableMapping";
+            this.toggleEnableMapping.Properties.Appearance.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.toggleEnableMapping.Properties.Appearance.Options.UseFont = true;
+            this.toggleEnableMapping.Properties.OffText = "关闭";
+            this.toggleEnableMapping.Properties.OnText = "开启";
+            this.toggleEnableMapping.Size = new System.Drawing.Size(142, 29);
+            this.toggleEnableMapping.TabIndex = 6;
+            this.toggleEnableMapping.Toggled += new System.EventHandler(this.toggleEnableMapping_Toggled);
+            // 
             // KeyMappingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.toggleEnableMapping);
             this.Controls.Add(this.btnRemoveMapping);
             this.Controls.Add(this.btnAddMapping);
             this.Controls.Add(this.lblHint);
@@ -133,6 +148,7 @@
             this.Size = new System.Drawing.Size(924, 595);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleEnableMapping.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +163,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn Shortcuts;
         private DevExpress.XtraGrid.Columns.GridColumn ShortcutActions;
+        private DevExpress.XtraEditors.ToggleSwitch toggleEnableMapping;
     }
 }
