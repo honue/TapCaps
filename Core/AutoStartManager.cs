@@ -8,6 +8,7 @@ namespace TapCaps.Core
     {
         private const string RunKeyPath = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string AppName = "TapCaps";
+        internal const string AutoStartArgument = "--auto-start";
 
         public static bool IsEnabled()
         {
@@ -18,7 +19,10 @@ namespace TapCaps.Core
                     if (key == null) return false;
                     var current = key.GetValue(AppName) as string;
                     if (string.IsNullOrEmpty(current)) return false;
-                    return string.Equals(current, Application.ExecutablePath, StringComparison.OrdinalIgnoreCase);
+                    // Accept both legacy (path only) and argument-based entries.
+                    var exePath = Application.ExecutablePath;
+                    return current.StartsWith(exePath, StringComparison.OrdinalIgnoreCase) ||
+                           current.StartsWith($"\"{exePath}\"", StringComparison.OrdinalIgnoreCase);
                 }
             }
             catch
@@ -37,7 +41,9 @@ namespace TapCaps.Core
                     if (key == null) return;
                     if (enabled)
                     {
-                        key.SetValue(AppName, Application.ExecutablePath);
+                        var exePath = Application.ExecutablePath;
+                        var command = $"\"{exePath}\" {AutoStartArgument}";
+                        key.SetValue(AppName, command);
                     }
                     else
                     {

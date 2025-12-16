@@ -18,8 +18,9 @@ namespace TapCaps.UI
         private LogicHandler _handler;
         private NotifyIcon _trayIcon;
         private ContextMenuStrip _trayMenu;
+        private readonly bool _startHidden;
+        private bool _isHidingToTray;
         private bool _exitRequested;
-        private bool _firstShown;
         private bool _trayIconEnabled = true;
         private UserSettings _settings;
 
@@ -27,13 +28,17 @@ namespace TapCaps.UI
 
         #region 构造函数
 
-        public MainForm(UserSettings settings = null)
+        public MainForm(UserSettings settings = null, bool startHidden = false)
         {
             _settings = settings;
+            _startHidden = startHidden;
             InitializeComponent();
             InitializeCore();
             InitializeTrayIcon();
-            // this.Shown += MainForm_Shown;
+            if (_startHidden)
+            {
+                this.Load += MainForm_StartHidden;
+            }
             this.Resize += MainForm_Resize;
         }
 
@@ -227,14 +232,10 @@ namespace TapCaps.UI
             _trayIcon.DoubleClick += (s, e) => RestoreFromTray();
         }
 
-        /// <summary>
-        /// 启动时直接隐藏到托盘
-        /// </summary>
-        private void MainForm_Shown(object sender, EventArgs e)
+        private void MainForm_StartHidden(object sender, EventArgs e)
         {
-            if (_firstShown) return;
-            _firstShown = true;
-            HideToTray();
+            // Defer hiding to avoid re-entrancy during initial layout.
+            this.BeginInvoke((Action)(HideToTray));
         }
 
         /// <summary>
@@ -242,6 +243,7 @@ namespace TapCaps.UI
         /// </summary>
         private void MainForm_Resize(object sender, EventArgs e)
         {
+            if (_isHidingToTray) return;
             if (this.WindowState == FormWindowState.Minimized && !_exitRequested && _trayIconEnabled)
             {
                 HideToTray();
@@ -254,11 +256,19 @@ namespace TapCaps.UI
         private void HideToTray()
         {
             if (!_trayIconEnabled) return;
-            this.Hide();
-            this.ShowInTaskbar = false;
-            if (_trayIcon != null && !_trayIcon.Visible)
+            _isHidingToTray = true;
+            try
             {
-                _trayIcon.Visible = true;
+                this.Hide();
+                this.ShowInTaskbar = false;
+                if (_trayIcon != null && !_trayIcon.Visible)
+                {
+                    _trayIcon.Visible = true;
+                }
+            }
+            finally
+            {
+                _isHidingToTray = false;
             }
         }
 

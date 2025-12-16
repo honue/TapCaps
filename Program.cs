@@ -14,7 +14,7 @@ namespace TapCaps
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.UserSkins.BonusSkins.Register();
@@ -22,6 +22,9 @@ namespace TapCaps
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("The Bezier Light");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            bool startHidden = args != null && Array.Exists(args, a =>
+                string.Equals(a, AutoStartManager.AutoStartArgument, StringComparison.OrdinalIgnoreCase));
 
             const string mutexName = "Global\\TapCaps_E5CE010D_4F6B_4C1B_9E9E_9D05A4A91234";
             bool createdNew;
@@ -35,7 +38,7 @@ namespace TapCaps
 
                 var settings = UserSettingsStore.Load() ?? new UserSettings();
                 AutoStartManager.SetAutoStart(settings.AutoStartEnabled);
-                Application.Run(new MainForm(settings));
+                Application.Run(new MainForm(settings, startHidden));
             }
         }
     }
