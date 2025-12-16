@@ -4,19 +4,26 @@
    <h1 align="center">TapCaps</h1>
 </p>
 
+<p align="center">
+  <a href="https://github.com/honue/TapCaps/stargazers"><img src="https://img.shields.io/github/stars/honue/TapCaps?style=for-the-badge" alt="GitHub Repo stars"></a>
+  <a href="https://github.com/honue/TapCaps/releases"><img src="https://img.shields.io/github/downloads/honue/TapCaps/total?style=for-the-badge" alt="GitHub downloads"></a>
+  <img src="https://img.shields.io/badge/platform-Windows-blue?style=for-the-badge" alt="Platform Windows">
+  <img src="https://img.shields.io/badge/.NET-4.7.2-blueviolet?style=for-the-badge" alt=".NET 4.7.2">
+</p>
+
 ## 功能
-- macOS 风格 CapsLock：区分短按与长按。短按（默认 < 250ms）在 CapsLock 已开启时关闭大写，否则发送 `Ctrl+Space` 切换中/英文输入法；长按则强制开启大写锁定。阈值可在 50–2000ms 之间调整。
-- HUD 气泡提示：在光标附近显示当前输入模式（EN/ZH）或 CapsLock 状态，方便确认是否成功切换。
-- 自定义按键映射：把任意组合键映射到另一组组合键，格式形如 `Ctrl+Alt+K` 或 `Shift+F1`，被映射的按键会被拦截，不再透传给系统。
-- 托盘与后台常驻：默认最小化到任务栏托盘，双击图标可恢复界面；程序启动时会写入当前用户的开机自启动项。
+- macOS 风格 CapsLock：短按切换中/英文，长按锁定大写，阈值可调。
+- HUD 提示：在光标附近显示 中/英 或 CapsLock 状态。
+- 按键映射：把组合键映射到另一组快捷键并拦截原按键。
+- 托盘驻留：最小化到托盘，双击恢复，可选开机自启。
 
 ## 使用方式
-1. 运行 `TapCaps.exe` 后，程序会注册键盘钩子并驻留托盘，界面在需要时再打开即可。
-2. 「快速设置」页可启用/关闭 macOS 风格 CapsLock、HUD、托盘图标，并调整长按阈值。
-3. 「按键映射」页可添加或删除映射规则：在表格中填写源快捷键和目标快捷键（例如 `Ctrl+Shift+J -> Ctrl+Alt+J`），保存后立即生效。
-4. 想彻底退出请从托盘菜单选择“退出”或在主界面点击关闭并确认。
+1. 运行 `TapCaps.exe`，程序会注册键盘钩子并驻留托盘，需要时再打开界面。
+2. 「快速设置」可开关 macOS 风格 CapsLock、HUD、托盘图标，并调整长按阈值。
+3. 「按键映射」可添加/删除规则：在表格填写源快捷键和目标快捷键（如 `Ctrl+Shift+J -> Ctrl+Alt+J`），保存即生效。
+4. 退出：托盘菜单选择“退出”或主界面关闭并确认。
 
 ## 兼容性与注意事项
-- 测试环境 Windows 11，微软拼音输入法。
-- 键盘钩子在当前账户权限下工作，如遇到权限拦截，可尝试以管理员身份运行。
-- 如果 HUD 未出现，可能是前台窗口阻止了浮层，切换窗口或重新启动程序通常可以恢复。
+- 测试环境：Windows 11 + 微软拼音。
+- 如遇权限拦截，可尝试管理员运行。
+- HUD 未出现时，切换窗口或重启程序再试。

@@ -198,8 +198,7 @@
             this.txtHighlights.ReadOnly = true;
             this.txtHighlights.Size = new System.Drawing.Size(699, 202);
             this.txtHighlights.TabIndex = 0;
-            this.txtHighlights.Text = "• CapsLock 短按：自动切换输入法，并弹出 HUD 状态提示\n• CapsLock 长按：直接开启/关闭大小写锁定，减少误切换\n• 按键映射：将常用组合键" +
-    "改为单键触发，提升效率\n• 托盘常驻：关闭窗口后最小化到托盘，随时召回\n• HUD 提示：切换输入法或大小写状态时弹窗提醒";
+            this.txtHighlights.Text = "• macOS 风格 CapsLock：区分短按（切换输入法）与长按（锁定大小写），阈值可调\n• HUD 气泡提示：在光标附近显示 中/英 或 CapsLock 状态\n• 自定义按键映射：将任意组合键映射到另一组快捷键并拦截原按键\n• 托盘与后台常驻：最小化到托盘，双击恢复，并可写入开机自启";
             // 
             // AboutPage
             // 
