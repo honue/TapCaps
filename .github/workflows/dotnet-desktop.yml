@@ -1,0 +1,62 @@
+name: Release TapCaps
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    env:
+      SOLUTION_FILE: TapCaps.sln
+      BUILD_CONFIGURATION: Release
+      BUILD_PLATFORM: "Any CPU"
+      OUTPUT_DIR: TapCaps/Build/Release
+
+    steps:
+      # 1️⃣ Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup MSBuild
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      # 3️⃣ Restore NuGet
+      - name: Restore NuGet packages
+        run: nuget restore $env:SOLUTION_FILE
+
+      # 4️⃣ Build Release
+      - name: Build
+        run: |
+          msbuild $env:SOLUTION_FILE `
+            /p:Configuration=$env:BUILD_CONFIGURATION `
+            /p:Platform="$env:BUILD_PLATFORM"
+
+      # 5️⃣ Get version from git tag
+      - name: Get version
+        id: version
+        run: |
+          $tag = "${{ github.ref_name }}"
+          echo "version=$tag" >> $env:GITHUB_OUTPUT
+
+      # 6️⃣ Zip artifacts
+      - name: Package release
+        run: |
+          $zipName = "TapCaps-${{ steps.version.outputs.version }}.zip"
+          Compress-Archive `
+            -Path "$env:OUTPUT_DIR\*" `
+            -DestinationPath $zipName
+
+      # 7️⃣ Create GitHub Release
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TapCaps ${{ steps.version.outputs.version }}
+          tag_name: ${{ steps.version.outputs.version }}
+          files: |
+            TapCaps-${{ steps.version.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
