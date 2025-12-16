@@ -65,7 +65,7 @@
       <Private>true</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v21.1.Core" >
-      <HintPath>Libs\DevExpress.Printing.v21.1.dll</HintPath>
+      <HintPath>Libs\DevExpress.Printing.v21.1.Core.dll</HintPath>
       <Private>true</Private>
     </Reference>
     <Reference Include="DevExpress.Utils.v21.1" >
@@ -77,7 +77,7 @@
       <Private>true</Private>
     </Reference>
     <Reference Include="DevExpress.Sparkline.v21.1.Core" >
-      <HintPath>Libs\DevExpress.Sparkline.v21.1.dll</HintPath>
+      <HintPath>Libs\DevExpress.Sparkline.v21.1.Core.dll</HintPath>
       <Private>true</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v21.1" >
