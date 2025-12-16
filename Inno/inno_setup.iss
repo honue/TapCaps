@@ -23,7 +23,7 @@ PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename=TapCaps_Setup_v{#MyAppVersion}
 
 ; ✅ 相对路径
-SetupIconFile=TapCaps.ico
+SetupIconFile=..\TapCaps.ico
 
 SolidCompression=yes
 WizardStyle=modern
@@ -37,13 +37,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 ; ✅ CI 构建输出目录
-Source: "Build\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\Build\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}";
-Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}";
-Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent

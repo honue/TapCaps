@@ -42,3 +42,4 @@ x86/
 # 不排除
 Inno/**
 !Inno/inno_setup.iss
+!Inno/ChineseSimplified.isl

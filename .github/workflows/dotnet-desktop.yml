@@ -36,7 +36,7 @@ jobs:
             /p:Configuration=$env:BUILD_CONFIGURATION `
             /p:Platform="$env:BUILD_PLATFORM"
 
-      # 5️⃣ 从 Git tag 注入版本号（给 Inno 用）
+      # 5️⃣ 从 Git tag 注入版本号
       - name: Set app version
         shell: pwsh
         run: |
@@ -44,26 +44,16 @@ jobs:
           echo "APP_VERSION=$version" >> $env:GITHUB_ENV
           Write-Host "APP_VERSION=$version"
 
-      # 6️⃣ 安装 Inno Setup（CI 稳定写法）
+      # 6️⃣ 安装 Inno Setup
       - name: Install Inno Setup
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           $PSNativeCommandUseErrorActionPreference = $true
 
-          Invoke-WebRequest `
-            https://files.jrsoftware.org/is/6/innosetup-6.5.0.exe `
-            -OutFile innosetup.exe
-
-          Start-Process innosetup.exe `
-            -ArgumentList "/SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART" `
-            -Wait
-
-          "C:\Program Files (x86)\Inno Setup 6" |
-            Out-File -Append -Encoding utf8 $env:GITHUB_PATH
-
-          # 验证 ISCC 是否可用
-          iscc /?
+          curl.exe -OL https://files.jrsoftware.org/is/6/innosetup-6.5.0.exe
+          .\innosetup-6.5.0.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+          "C:\Program Files (x86)\Inno Setup 6" >> $env:GITHUB_PATH
 
       # 7️⃣ 使用 Inno Setup 生成安装包
       - name: Build installer
@@ -71,24 +61,24 @@ jobs:
         run: |
           iscc Inno/inno_setup.iss
 
-      # 8️⃣ 校验安装包是否生成（防翻车）
+      # 8️⃣ 校验安装包是否生成
       - name: Verify installer
         shell: pwsh
         run: |
-          $path = "Output/TapCaps_Setup_v${{ github.ref_name }}.exe"
+          $path = "Inno/Output/TapCaps_Setup_${{ github.ref_name }}.exe"
           if (!(Test-Path $path)) {
             Write-Error "Installer not found: $path"
             exit 1
           }
           Write-Host "Found installer: $path"
 
-      # 9️⃣ 只发布 Setup.exe 到 GitHub Releases
+      # 9️⃣ 发布 Setup.exe 到 GitHub Releases
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: TapCaps ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           files: |
-            Output/TapCaps_Setup_v${{ github.ref_name }}.exe
+            Inno/Output/TapCaps_Setup_${{ github.ref_name }}.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
