@@ -13,7 +13,7 @@ jobs:
       SOLUTION_FILE: TapCaps.sln
       BUILD_CONFIGURATION: Release
       BUILD_PLATFORM: "Any CPU"
-      OUTPUT_DIR: TapCaps/Build/Release
+      OUTPUT_DIR: Build/Release
 
     steps:
       # 1️⃣ Checkout
