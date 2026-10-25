@@ -43,6 +43,8 @@
             this.toggleHud = new DevExpress.XtraEditors.ToggleSwitch();
             this.lblMacStyleText = new System.Windows.Forms.Label();
             this.toggleMacStyle = new DevExpress.XtraEditors.ToggleSwitch();
+            this.lblSwitchHotkey = new System.Windows.Forms.Label();
+            this.cmbSwitchHotkey = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupSwitches.SuspendLayout();
@@ -66,7 +68,7 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 129F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 166F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 593);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -129,12 +131,14 @@
             this.groupSwitches.Controls.Add(this.toggleHud);
             this.groupSwitches.Controls.Add(this.lblMacStyleText);
             this.groupSwitches.Controls.Add(this.toggleMacStyle);
+            this.groupSwitches.Controls.Add(this.lblSwitchHotkey);
+            this.groupSwitches.Controls.Add(this.cmbSwitchHotkey);
             this.groupSwitches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupSwitches.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupSwitches.Location = new System.Drawing.Point(18, 83);
             this.groupSwitches.Margin = new System.Windows.Forms.Padding(18, 3, 18, 3);
             this.groupSwitches.Name = "groupSwitches";
-            this.groupSwitches.Size = new System.Drawing.Size(645, 123);
+            this.groupSwitches.Size = new System.Drawing.Size(645, 160);
             this.groupSwitches.TabIndex = 2;
             this.groupSwitches.TabStop = false;
             this.groupSwitches.Text = "设置开关";
@@ -254,6 +258,30 @@
             this.toggleMacStyle.TabIndex = 2;
             this.toggleMacStyle.Toggled += new System.EventHandler(this.toggleMacStyle_Toggled);
             // 
+            // lblSwitchHotkey
+            //
+            this.lblSwitchHotkey.AutoSize = true;
+            this.lblSwitchHotkey.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSwitchHotkey.Location = new System.Drawing.Point(22, 116);
+            this.lblSwitchHotkey.Name = "lblSwitchHotkey";
+            this.lblSwitchHotkey.Size = new System.Drawing.Size(130, 23);
+            this.lblSwitchHotkey.TabIndex = 9;
+            this.lblSwitchHotkey.Text = "切换输入法快捷键";
+            //
+            // cmbSwitchHotkey
+            //
+            this.cmbSwitchHotkey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSwitchHotkey.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbSwitchHotkey.FormattingEnabled = true;
+            this.cmbSwitchHotkey.Items.AddRange(new object[] {
+            "Ctrl+Space",
+            "Win+Space"});
+            this.cmbSwitchHotkey.Location = new System.Drawing.Point(190, 113);
+            this.cmbSwitchHotkey.Name = "cmbSwitchHotkey";
+            this.cmbSwitchHotkey.Size = new System.Drawing.Size(130, 29);
+            this.cmbSwitchHotkey.TabIndex = 10;
+            this.cmbSwitchHotkey.SelectedIndexChanged += new System.EventHandler(this.cmbSwitchHotkey_SelectedIndexChanged);
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -290,5 +318,7 @@
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Label lblAutoStart;
         private DevExpress.XtraEditors.ToggleSwitch toggleAutoStart;
+        private System.Windows.Forms.Label lblSwitchHotkey;
+        private System.Windows.Forms.ComboBox cmbSwitchHotkey;
     }
 }

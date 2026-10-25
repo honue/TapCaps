@@ -16,6 +16,7 @@ namespace TapCaps.Core
         [DataMember] public bool TrayIconEnabled { get; set; } = true;
         [DataMember] public bool AutoStartEnabled { get; set; } = true;
         [DataMember] public int LongPressThresholdMs { get; set; } = AppConfig.LongPressThresholdMs;
+        [DataMember] public ImeSwitchHotkey SwitchHotkey { get; set; } = ImeSwitchHotkey.WinSpace;
         [DataMember] public List<KeyMappingRule> KeyMappings { get; set; } = new List<KeyMappingRule>();
     }
 
@@ -33,6 +34,11 @@ namespace TapCaps.Core
                 Directory.CreateDirectory(dir);
             }
             return Path.Combine(dir, FileName);
+        }
+
+        private static bool IsKnownSwitchHotkey(ImeSwitchHotkey value)
+        {
+            return value == ImeSwitchHotkey.CtrlSpace || value == ImeSwitchHotkey.WinSpace;
         }
 
         public static UserSettings Load()
@@ -54,6 +60,12 @@ namespace TapCaps.Core
                     if (json.IndexOf("AutoStartEnabled", StringComparison.OrdinalIgnoreCase) < 0)
                     {
                         settings.AutoStartEnabled = true;
+                    }
+                    // 旧版本没有 SwitchHotkey 字段（或值非法）时，默认使用 Win+Space
+                    if (json.IndexOf("SwitchHotkey", StringComparison.OrdinalIgnoreCase) < 0 ||
+                        !IsKnownSwitchHotkey(settings.SwitchHotkey))
+                    {
+                        settings.SwitchHotkey = ImeSwitchHotkey.WinSpace;
                     }
                     return settings;
                 }

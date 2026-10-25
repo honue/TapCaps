@@ -65,6 +65,7 @@ namespace TapCaps.UI
                 _handler.EnableKeyMapping = _settings.EnableKeyMapping;
                 _handler.EnableHud = _settings.EnableHud;
                 _handler.LongPressThresholdMs = _settings.LongPressThresholdMs;
+                _handler.SwitchHotkey = _settings.SwitchHotkey;
                 _trayIconEnabled = _settings.TrayIconEnabled;
                 _handler.SetKeyMappings(_settings.KeyMappings);
             }
@@ -327,6 +328,7 @@ namespace TapCaps.UI
             _settings.EnableKeyMapping = _handler.EnableKeyMapping;
             _settings.EnableHud = _handler.EnableHud;
             _settings.LongPressThresholdMs = _handler.LongPressThresholdMs;
+            _settings.SwitchHotkey = _handler.SwitchHotkey;
             _settings.TrayIconEnabled = _trayIconEnabled;
             _settings.KeyMappings = _handler.GetKeyMappings().ToList();
 

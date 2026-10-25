@@ -23,6 +23,12 @@ namespace TapCaps.Core
         public const int HudDisplayDurationMs = 1500;
 
         /// <summary>
+        /// 短按切换输入法后，等待状态稳定下来的最长时间（毫秒）。
+        /// Win+Space 由 shell 处理，实测约 20~40ms 才生效，读取太早会拿到旧状态。
+        /// </summary>
+        public const int InputModeSettleTimeoutMs = 250;
+
+        /// <summary>
         /// HUD 淡出间隔（毫秒）
         /// </summary>
         public const int HudFadeIntervalMs = 10;

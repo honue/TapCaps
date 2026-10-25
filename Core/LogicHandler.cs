@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using TapCaps.UI;
 
@@ -24,7 +25,11 @@ namespace TapCaps.Core
         private readonly List<CompiledKeyMapping> _compiledMappings = new List<CompiledKeyMapping>();
         private List<KeyMappingRule> _rawMappings = new List<KeyMappingRule>();
 
-        private bool lastModeCN = true;
+        // 由 HUD 线程池回调写入、钩子线程读取，用 volatile 保证可见性
+        private volatile bool lastModeCN = true;
+
+        // 最近一次 HUD 请求的序号，用于丢弃过期的异步结果
+        private int _hudRequestId;
 
         #endregion
 
@@ -61,6 +66,11 @@ namespace TapCaps.Core
         /// Enable HUD popups.
         /// </summary>
         public bool EnableHud { get; set; } = true;
+
+        /// <summary>
+        /// 短按 CapsLock 时，用哪个组合键切换输入法（Ctrl+Space 或 Win+Space）。
+        /// </summary>
+        public ImeSwitchHotkey SwitchHotkey { get; set; } = ImeSwitchHotkey.WinSpace;
 
         /// <summary>
         /// Long press threshold in milliseconds.
@@ -152,8 +162,20 @@ namespace TapCaps.Core
             }
             else
             {
-                InputSimulator.SendCtrlSpace();
-                ShowInputModeHUD();
+                // 先记下切换前的状态，注入按键后再等它真正变化——注入是异步的，
+                // 立刻读取会读到旧值。
+                bool previousIsEnglish = InputSimulator.IsEnglishInputMode();
+
+                if (SwitchHotkey == ImeSwitchHotkey.WinSpace)
+                {
+                    InputSimulator.SendWinSpace();
+                }
+                else
+                {
+                    InputSimulator.SendCtrlSpace();
+                }
+
+                ShowInputModeHUDAfterSwitch(previousIsEnglish);
             }
         }
 
@@ -166,19 +188,38 @@ namespace TapCaps.Core
             }
         }
 
-        private void ShowInputModeHUD()
+        /// <summary>
+        /// 注入切换按键后显示输入法状态 HUD。
+        ///
+        /// 不能在这里同步等待状态变化：本方法跑在键盘钩子回调里，阻塞会拖慢按键响应，
+        /// 超过系统的 LowLevelHooksTimeout 还会导致钩子被摘掉。
+        /// 所以把等待放到线程池上，钩子回调立刻返回。
+        /// </summary>
+        private void ShowInputModeHUDAfterSwitch(bool previousIsEnglish)
         {
             if (!EnableHud) return;
-            if (InputSimulator.IsEnglishInputMode())
+
+            // 连续短按时，只让最后一次请求更新 HUD，避免旧结果后到覆盖新结果。
+            int requestId = Interlocked.Increment(ref _hudRequestId);
+
+            ThreadPool.QueueUserWorkItem(_ =>
             {
-                lastModeCN = false;
-                StateHUD.ShowState("英", "英文");
-            }
-            else
-            {
-                lastModeCN = true;
-                StateHUD.ShowState("中", "中文");
-            }
+                bool isEnglish = InputSimulator.WaitForInputModeChange(
+                    previousIsEnglish, AppConfig.InputModeSettleTimeoutMs);
+
+                if (Volatile.Read(ref _hudRequestId) != requestId) return;
+
+                lastModeCN = !isEnglish;
+
+                if (isEnglish)
+                {
+                    StateHUD.ShowState("英", "英文");
+                }
+                else
+                {
+                    StateHUD.ShowState("中", "中文");
+                }
+            });
         }
 
         private void LongPressTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

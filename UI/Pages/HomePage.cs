@@ -38,6 +38,7 @@ namespace TapCaps.Pages
             toggleMacStyle.Enabled = hasHandler;
             toggleHud.Enabled = hasHandler;
             numLongPress.Enabled = hasHandler;
+            cmbSwitchHotkey.Enabled = hasHandler;
             toggleAutoStart.Enabled = _mainForm != null;
 
             if (hasHandler)
@@ -45,6 +46,7 @@ namespace TapCaps.Pages
                 toggleMacStyle.IsOn = _handler.EnableMacCapsLock;
                 toggleHud.IsOn = _handler.EnableHud;
                 numLongPress.Value = ClampToRange(_handler.LongPressThresholdMs, numLongPress.Minimum, numLongPress.Maximum);
+                cmbSwitchHotkey.SelectedIndex = _handler.SwitchHotkey == ImeSwitchHotkey.WinSpace ? 1 : 0;
             }
 
             if (_mainForm != null)
@@ -86,6 +88,17 @@ namespace TapCaps.Pages
         private void toggleAutoStart_Toggled(object sender, EventArgs e)
         {
             _mainForm?.SetAutoStartEnabled(toggleAutoStart.IsOn);
+        }
+
+        private void cmbSwitchHotkey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_handler == null) return;
+            if (cmbSwitchHotkey.SelectedIndex < 0) return;
+
+            _handler.SwitchHotkey = cmbSwitchHotkey.SelectedIndex == 1
+                ? ImeSwitchHotkey.WinSpace
+                : ImeSwitchHotkey.CtrlSpace;
+            _mainForm?.PersistSettings();
         }
     }
 }
